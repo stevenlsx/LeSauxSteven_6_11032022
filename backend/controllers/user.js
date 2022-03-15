@@ -34,7 +34,7 @@ exports.signup = (req, res, next) => {
 /*Ce middleware permet la connexion. On verfie si l'adresse mail envoyer dans la requête correspond à une adresse mail existante.
 Si c'est le cas, alors on compare le mdp envoyé dans la requête avec le hash du mdp enregistré dans la BDD.
 Si c'est valide,on renvois au frontend  un token qui encode l'userId, une string secrète et une durée de validité du token
-Encoder l'user ID pdans notre token permet de verifier que l'on possède le bon userId pour modifier ses objets et pas ceux des autres utilisateurs */
+Encoder l'user ID dans notre token permet de verifier que l'on possède le bon userId pour modifier ses objets et pas ceux des autres utilisateurs */
 exports.login = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
