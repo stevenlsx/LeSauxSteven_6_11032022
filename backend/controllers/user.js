@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const dotenv = require("dotenv");
+dotenv.config();
 
 /* Ce middleware permet l'inscription. Il verifie d'abord si l'adresse mail existe ou non.
  Si elle n'existe pas alors on crypte le mot de passe, puis on créé une nouvelle instance de l'user qui contient son mdp crypté.
@@ -49,7 +51,7 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user._id,
-            token: jwt.sign({ userId: user._id }, "Token_Secret_Test", {
+            token: jwt.sign({ userId: user._id }, process.env.TOKEN, {
               expiresIn: "24h",
             }),
           });
