@@ -1,3 +1,5 @@
+//On initialise notre serveur local.
+
 const http = require("http");
 const app = require("./app");
 

@@ -1,3 +1,5 @@
+/*On créé notre modèle sauce qui sera enregistré dans notre BDD. On le prépare ensuite à l'exportation
+pour le rendre disponible. */
 const mongoose = require("mongoose");
 
 const sauceSchema = mongoose.Schema({
