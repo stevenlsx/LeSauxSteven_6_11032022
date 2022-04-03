@@ -44,11 +44,8 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
   );
-  if ("OPTIONS" == req.method) {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
+
+  next();
 });
 
 //Middleware permettant d'initialiser le dossier qui va stocker les images upload par les utilisateurs.

@@ -19,8 +19,8 @@ exports.createSauce = (req, res, next) => {
     }`,
     likes: 0,
     dislikes: 0,
-    userLikes: [],
-    userDislikes: [],
+    usersLiked: [],
+    usersDisliked: [],
   });
   sauce
     .save()
@@ -107,7 +107,7 @@ On incrémente le compteur de like de 1.*/
       },
       {
         $push: {
-          userLikes: userId,
+          usersLiked: userId,
         },
         $inc: {
           likes: +1,
@@ -126,7 +126,7 @@ On incrémente le compteur de like de 1.*/
       },
       {
         $push: {
-          userDislikes: userId,
+          usersDisliked: userId,
         },
         $inc: {
           dislikes: +1,
@@ -142,14 +142,14 @@ On incrémente le compteur de like de 1.*/
   if (like === 0) {
     Sauce.findOne({ _id: sauceId })
       .then((sauce) => {
-        if (sauce.userLikes.includes(userId)) {
+        if (sauce.usersLiked.includes(userId)) {
           Sauce.updateOne(
             {
               _id: sauceId,
             },
             {
               $pull: {
-                userLikes: userId,
+                usersLiked: userId,
               },
               $inc: {
                 likes: -1,
@@ -158,14 +158,14 @@ On incrémente le compteur de like de 1.*/
           )
             .then(() => res.status(200).json({ message: "Like retiré" }))
             .catch((error) => res.status(400).json({ error }));
-        } else if (sauce.userDislikes.includes(userId)) {
+        } else if (sauce.usersDisliked.includes(userId)) {
           Sauce.updateOne(
             {
               _id: sauceId,
             },
             {
               $pull: {
-                userDislikes: userId,
+                usersDisliked: userId,
               },
               $inc: {
                 dislikes: -1,
